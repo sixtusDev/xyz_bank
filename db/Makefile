@@ -6,3 +6,11 @@ createdb:
 
 dropdb:
 	docker exec -it xyz psql -U xyz -c  "DROP DATABASE xyz_bank;"
+
+migrateup:
+	migrate -path db/migration -database "postgresql://xyz:password@localhost:5432/xyz_bank?sslmode=disable" -verbose up
+
+migratedown:
+	migrate -path db/migration -database "postgresql://xyz:password@localhost:5432/xyz_bank?sslmode=disable" -verbose up
+
+.PHONY: postgres createdb dropdb migrateup migratedown
